@@ -1,0 +1,2592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>王洋 | Electrical Engineer Portfolio</title>
+  <style>
+    :root {
+      --primary: #1a4a7a;
+      --primary-dark: #0f2d4a;
+      --primary-mid: #2d6fb3;
+      --primary-light: #ebf4fc;
+      --teal: #14967f;
+      --teal-light: #e8f8f5;
+      --purple: #7b4cc2;
+      --purple-light: #f3eefb;
+      --orange: #e67e22;
+      --orange-light: #fef5e7;
+      --red: #d95c5c;
+      --red-light: #fdeaea;
+      --green: #27ae60;
+      --green-light: #e8f8f0;
+      --text: #21303d;
+      --text-light: #5a6877;
+      --muted: #8a96a2;
+      --line: #dde6ee;
+      --line-soft: #eaf0f5;
+      --bg: #f4f8fb;
+      --white: #ffffff;
+      --shadow: 0 12px 32px rgba(20, 50, 90, .08);
+      --shadow-hover: 0 20px 44px rgba(20, 50, 90, .13);
+      --radius: 18px;
+      --max-w: 1200px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(45, 111, 179, .08) 0, transparent 28%),
+        radial-gradient(circle at left center, rgba(20, 150, 127, .07) 0, transparent 24%),
+        linear-gradient(180deg, #f7fafd 0%, #f1f6fb 100%);
+      color: var(--text);
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .container {
+      width: min(var(--max-w), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    /* ===== Scroll Progress Bar ===== */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--teal), var(--purple));
+      z-index: 9999;
+      width: 0%;
+      transition: width .1s linear;
+    }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, .88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(26, 74, 122, .08);
+    }
+
+    .navbar-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+    }
+
+    .nav-brand {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--teal));
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: .7; }
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--text-light);
+      position: relative;
+      transition: .2s;
+      padding-bottom: 2px;
+      font-weight: 500;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--primary-mid), var(--teal));
+      transition: .25s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--primary); }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+
+    .lang-switch {
+      display: flex;
+      border: 1.5px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-light);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .lang-btn.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      padding: 54px 0 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(45, 111, 179, .06) 0%, transparent 70%);
+      animation: float-circle 8s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(20, 150, 127, .06) 0%, transparent 70%);
+      animation: float-circle 6s ease-in-out infinite reverse;
+    }
+
+    @keyframes float-circle {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(20px, -20px); }
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 34px;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-left {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-left::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--teal) 50%, var(--purple) 100%);
+    }
+
+    .hero-left-body {
+      padding: 22px 22px 20px;
+    }
+
+    .hero-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid #dbe5ee;
+      background: linear-gradient(135deg, #eef3f7, #e8eef4);
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease;
+    }
+
+    .hero-photo:hover img {
+      transform: scale(1.03);
+    }
+
+    .hero-side-block {
+      padding: 14px 14px 12px;
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fff 0%, #fbfdff 100%);
+      margin-bottom: 12px;
+      transition: .2s;
+    }
+
+    .hero-side-block:hover {
+      border-color: var(--primary-mid);
+      box-shadow: 0 4px 16px rgba(45, 111, 179, .08);
+    }
+
+    .hero-side-block:last-child { margin-bottom: 0; }
+
+    .hero-side-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+      letter-spacing: .5px;
+    }
+
+    .hero-side-list {
+      display: grid;
+      gap: 7px;
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .hero-side-list div strong {
+      color: var(--text);
+      margin-right: 6px;
+    }
+
+    .hero-main {
+      padding: 6px 2px;
+    }
+
+    .hero-kicker {
+      font-size: 13px;
+      color: var(--primary-mid);
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-kicker::before {
+      content: "";
+      display: inline-block;
+      width: 28px; height: 3px;
+      background: linear-gradient(90deg, var(--primary-mid), var(--teal));
+      border-radius: 3px;
+    }
+
+    .hero-title {
+      font-size: 48px;
+      line-height: 1.12;
+      color: var(--primary-dark);
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .hero-title .typed-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 46px;
+      background: var(--primary-mid);
+      margin-left: 4px;
+      animation: blink-cursor .75s step-end infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes blink-cursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--primary-mid);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-light);
+      text-align: justify;
+      margin-bottom: 18px;
+      max-width: 760px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      padding: 0 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: .22s;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(26, 74, 122, .18);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(26, 74, 122, .24);
+    }
+
+    .btn-secondary {
+      background: #fff;
+      border: 1.5px solid var(--line);
+      color: var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary-light);
+      border-color: var(--primary-mid);
+    }
+
+    .btn-outline-white {
+      background: rgba(255,255,255,.12);
+      border: 1.5px solid rgba(255,255,255,.3);
+      color: #fff;
+    }
+
+    .btn-outline-white:hover {
+      background: rgba(255,255,255,.22);
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 2px;
+    }
+
+    .quick-item {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: 0 4px 14px rgba(20, 50, 90, .04);
+      transition: .22s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quick-item::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--primary-mid), var(--teal));
+      opacity: 0;
+      transition: .3s;
+    }
+
+    .quick-item:hover::before { opacity: 1; }
+    .quick-item:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+    .quick-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .quick-value {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* ===== Stats Bar ===== */
+    .stats-bar {
+      padding: 22px 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .stat-item {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px 20px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: .22s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .stat-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .stat-number {
+      font-size: 36px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--primary-mid));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .stat-number .stat-suffix {
+      font-size: 18px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-light);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* ===== Common Section ===== */
+    .section { padding: 32px 0; }
+
+    .section-header {
+      margin-bottom: 24px;
+    }
+
+    .section-kicker {
+      font-size: 12px;
+      color: var(--primary-mid);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-kicker::before {
+      content: "";
+      display: inline-block;
+      width: 20px; height: 2px;
+      background: var(--primary-mid);
+      border-radius: 2px;
+    }
+
+    .section-title {
+      font-size: 30px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .section-desc {
+      font-size: 15px;
+      color: var(--text-light);
+      max-width: 760px;
+    }
+
+    /* ===== Career Objective ===== */
+    .objective-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      padding: 36px 40px;
+      background: linear-gradient(135deg, #f8fbff 0%, #eef5fc 50%, #f0f9f7 100%);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .objective-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--teal), var(--purple), var(--orange));
+    }
+
+    .objective-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .objective-main h3 {
+      font-size: 22px;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .objective-main p {
+      font-size: 15px;
+      color: var(--text-light);
+      text-align: justify;
+      line-height: 1.8;
+    }
+
+    .objective-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .obj-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid;
+    }
+
+    .obj-tag.blue { background: var(--primary-light); color: var(--primary); border-color: #c8ddf2; }
+    .obj-tag.teal { background: var(--teal-light); color: var(--teal); border-color: #b8e8df; }
+    .obj-tag.purple { background: var(--purple-light); color: var(--purple); border-color: #d8c9f0; }
+    .obj-tag.orange { background: var(--orange-light); color: var(--orange); border-color: #f5ddb8; }
+
+    .objective-details {
+      display: grid;
+      gap: 12px;
+    }
+
+    .obj-detail {
+      display: flex;
+      gap: 14px;
+      padding: 14px 16px;
+      background: var(--white);
+      border-radius: 14px;
+      border: 1px solid var(--line-soft);
+      transition: .2s;
+    }
+
+    .obj-detail:hover {
+      border-color: var(--primary-mid);
+      box-shadow: 0 4px 16px rgba(45, 111, 179, .08);
+    }
+
+    .obj-detail-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .obj-detail-icon.blue { background: var(--primary-light); }
+    .obj-detail-icon.teal { background: var(--teal-light); }
+    .obj-detail-icon.purple { background: var(--purple-light); }
+    .obj-detail-icon.orange { background: var(--orange-light); }
+
+    .obj-detail-text h4 {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .obj-detail-text p {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    /* ===== About ===== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+    }
+
+    .card-body { padding: 24px 26px; }
+
+    .about-text p {
+      font-size: 15px;
+      color: var(--text-light);
+      margin-bottom: 12px;
+      text-align: justify;
+    }
+
+    .highlights { display: grid; gap: 12px; }
+
+    .highlight {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 18px;
+      box-shadow: 0 4px 14px rgba(20, 50, 90, .05);
+      border-left: 4px solid var(--primary-mid);
+      transition: .22s;
+    }
+
+    .highlight:hover {
+      transform: translateX(4px);
+      box-shadow: 0 8px 24px rgba(20, 50, 90, .08);
+    }
+
+    .highlight.teal { border-left-color: var(--teal); }
+    .highlight.purple { border-left-color: var(--purple); }
+    .highlight.orange { border-left-color: var(--orange); }
+
+    .highlight h4 {
+      font-size: 16px;
+      color: var(--primary-dark);
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .highlight p {
+      font-size: 13.8px;
+      color: var(--text-light);
+      text-align: justify;
+    }
+
+    /* ===== Core Strengths ===== */
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .strength-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px 22px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: .25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .strength-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, transparent 60%, rgba(45, 111, 179, .04));
+      opacity: 0;
+      transition: .3s;
+    }
+
+    .strength-card:hover::before { opacity: 1; }
+
+    .strength-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .strength-icon {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+    }
+
+    .strength-icon.blue { background: var(--primary-light); }
+    .strength-icon.teal { background: var(--teal-light); }
+    .strength-icon.purple { background: var(--purple-light); }
+    .strength-icon.orange { background: var(--orange-light); }
+
+    .strength-card h4 {
+      font-size: 16px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .strength-card p {
+      font-size: 13.5px;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    /* ===== Timeline ===== */
+    .timeline {
+      position: relative;
+      padding-left: 26px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 8px; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--primary), var(--teal));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 28px;
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -3px; top: 6px;
+      width: 14px; height: 14px;
+      background: #fff;
+      border: 3px solid var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px var(--primary-light);
+      transition: .3s;
+    }
+
+    .timeline-item:hover::before {
+      background: var(--primary);
+      box-shadow: 0 0 0 6px var(--primary-light);
+    }
+
+    .timeline-date {
+      display: inline-flex;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      border: 1px solid #d5e6f5;
+      background: var(--primary-light);
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    .timeline-title {
+      font-size: 20px;
+      color: var(--text);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .timeline-subtitle {
+      font-size: 14px;
+      color: var(--primary-mid);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .timeline-desc {
+      font-size: 14px;
+      color: var(--text-light);
+      text-align: justify;
+    }
+
+    .timeline-courses {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .course-tag {
+      display: inline-flex;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #f5f8fc;
+      color: var(--text-light);
+      border: 1px solid var(--line-soft);
+    }
+
+    /* ===== Project Cards ===== */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .project-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: .22s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .project-top {
+      padding: 16px 18px 0;
+    }
+
+    .project-line {
+      height: 5px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .line1 { background: linear-gradient(90deg, var(--primary), var(--primary-mid)); }
+    .line2 { background: linear-gradient(90deg, var(--teal), #34b79c); }
+    .line3 { background: linear-gradient(90deg, var(--orange), #f1a647); }
+    .line4 { background: linear-gradient(90deg, var(--purple), #a06de0); }
+
+    .project-date {
+      display: inline-flex;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      border: 1px solid #d7e6f4;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .project-title {
+      font-size: 18px;
+      color: var(--text);
+      font-weight: 700;
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+
+    .project-body {
+      padding: 0 18px 14px;
+      font-size: 14px;
+      color: var(--text-light);
+      text-align: justify;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 0 18px 18px;
+    }
+
+    .project-tag {
+      display: inline-flex;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid;
+    }
+
+    .project-tag.blue { background: var(--primary-light); color: var(--primary); border-color: #c8ddf2; }
+    .project-tag.teal { background: var(--teal-light); color: var(--teal); border-color: #b8e8df; }
+    .project-tag.purple { background: var(--purple-light); color: var(--purple); border-color: #d8c9f0; }
+    .project-tag.orange { background: var(--orange-light); color: var(--orange); border-color: #f5ddb8; }
+
+    /* ===== Internship ===== */
+    .intern-grid { display: grid; gap: 14px; }
+
+    .intern-item {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 20px;
+      padding: 20px 22px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      transition: .22s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intern-item::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0;
+      width: 4px; height: 100%;
+      background: linear-gradient(180deg, var(--primary), var(--teal));
+      opacity: 0;
+      transition: .3s;
+    }
+
+    .intern-item:hover::before { opacity: 1; }
+
+    .intern-item:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .intern-company {
+      font-size: 16px;
+      color: var(--text);
+      font-weight: 700;
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+
+    .intern-role {
+      font-size: 13px;
+      color: var(--primary-mid);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .intern-date {
+      display: inline-flex;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid #d5e6f5;
+    }
+
+    .intern-desc {
+      font-size: 14px;
+      color: var(--text-light);
+      text-align: justify;
+    }
+
+    .intern-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .intern-hl-tag {
+      display: inline-flex;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      background: #f5f8fc;
+      color: var(--text-light);
+      border: 1px solid var(--line-soft);
+    }
+
+    /* ===== Skills ===== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .skill-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 22px 22px;
+      border-top: 4px solid;
+      transition: .22s;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .skill-card.c1 { border-top-color: var(--primary-mid); }
+    .skill-card.c2 { border-top-color: var(--teal); }
+    .skill-card.c3 { border-top-color: var(--purple); }
+    .skill-card.c4 { border-top-color: var(--orange); }
+    .skill-card.c5 { border-top-color: var(--red); }
+    .skill-card.c6 { border-top-color: #34495e; }
+
+    .skill-title {
+      font-size: 16px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skill-body {
+      font-size: 13.8px;
+      color: var(--text-light);
+      text-align: justify;
+      margin-bottom: 14px;
+    }
+
+    .skill-bars {
+      display: grid;
+      gap: 10px;
+    }
+
+    .skill-bar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .skill-bar-label {
+      font-size: 12px;
+      color: var(--text-light);
+      font-weight: 600;
+      min-width: 90px;
+      flex-shrink: 0;
+    }
+
+    .skill-bar-track {
+      flex: 1;
+      height: 6px;
+      background: var(--line-soft);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      width: 0;
+      transition: width 1.2s ease;
+    }
+
+    .skill-bar-fill.blue { background: linear-gradient(90deg, var(--primary), var(--primary-mid)); }
+    .skill-bar-fill.teal { background: linear-gradient(90deg, var(--teal), #34b79c); }
+    .skill-bar-fill.purple { background: linear-gradient(90deg, var(--purple), #a06de0); }
+    .skill-bar-fill.orange { background: linear-gradient(90deg, var(--orange), #f1a647); }
+    .skill-bar-fill.red { background: linear-gradient(90deg, var(--red), #e88); }
+    .skill-bar-fill.dark { background: linear-gradient(90deg, #34495e, #5a7a96); }
+
+    /* ===== Certifications ===== */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .cert-card {
+      display: flex;
+      gap: 16px;
+      padding: 20px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      transition: .22s;
+      align-items: flex-start;
+    }
+
+    .cert-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .cert-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .cert-icon.blue { background: var(--primary-light); }
+    .cert-icon.teal { background: var(--teal-light); }
+    .cert-icon.purple { background: var(--purple-light); }
+    .cert-icon.orange { background: var(--orange-light); }
+
+    .cert-info h4 {
+      font-size: 15px;
+      color: var(--text);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .cert-info p {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .cert-info .cert-score {
+      display: inline-flex;
+      margin-top: 6px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--teal-light);
+      color: var(--teal);
+      border: 1px solid #b8e8df;
+    }
+
+    /* ===== Hobbies & Interests ===== */
+    .hobbies-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .hobby-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: .28s;
+      position: relative;
+    }
+
+    .hobby-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .hobby-banner {
+      height: 8px;
+      width: 100%;
+    }
+
+    .hobby-banner.books { background: linear-gradient(90deg, #8e44ad, #9b59b6, #a06de0); }
+    .hobby-banner.music { background: linear-gradient(90deg, #e74c3c, #c0392b, #e67e22); }
+    .hobby-banner.sports { background: linear-gradient(90deg, #27ae60, #2ecc71, #14967f); }
+
+    .hobby-body {
+      padding: 24px 22px;
+    }
+
+    .hobby-icon {
+      width: 64px; height: 64px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .hobby-icon.books { 
+      background: linear-gradient(135deg, var(--purple-light), #e8dff5); 
+    }
+    .hobby-icon.music { 
+      background: linear-gradient(135deg, var(--red-light), #fde5d8); 
+    }
+    .hobby-icon.sports { 
+      background: linear-gradient(135deg, var(--green-light), #d4f5e4); 
+    }
+
+    .hobby-icon::after {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border-radius: 18px;
+      border: 2px dashed;
+      opacity: 0.3;
+    }
+
+    .hobby-icon.books::after { border-color: var(--purple); }
+    .hobby-icon.music::after { border-color: var(--red); }
+    .hobby-icon.sports::after { border-color: var(--green); }
+
+    .hobby-card h4 {
+      font-size: 18px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .hobby-desc {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.75;
+      margin-bottom: 14px;
+      text-align: justify;
+    }
+
+    .hobby-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hobby-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid;
+      transition: .2s;
+    }
+
+    .hobby-tag:hover {
+      transform: scale(1.05);
+    }
+
+    .hobby-tag.purple { 
+      background: var(--purple-light); 
+      color: var(--purple); 
+      border-color: #d8c9f0; 
+    }
+    .hobby-tag.red { 
+      background: var(--red-light); 
+      color: var(--red); 
+      border-color: #f5c9c9; 
+    }
+    .hobby-tag.orange { 
+      background: var(--orange-light); 
+      color: var(--orange); 
+      border-color: #f5ddb8; 
+    }
+    .hobby-tag.green { 
+      background: var(--green-light); 
+      color: var(--green); 
+      border-color: #b8e8cf; 
+    }
+    .hobby-tag.teal { 
+      background: var(--teal-light); 
+      color: var(--teal); 
+      border-color: #b8e8df; 
+    }
+
+    .hobby-quote {
+      margin-top: 14px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, #f8f9fc, #f5f7fa);
+      border-radius: 12px;
+      border-left: 4px solid;
+      position: relative;
+    }
+
+    .hobby-quote.purple { border-left-color: var(--purple); }
+    .hobby-quote.red { border-left-color: var(--red); }
+    .hobby-quote.green { border-left-color: var(--green); }
+
+    .hobby-quote-text {
+      font-size: 13px;
+      color: var(--text-light);
+      font-style: italic;
+      line-height: 1.6;
+      display: block;
+    }
+
+    .hobby-quote-author {
+      display: block;
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      font-style: normal;
+      text-align: right;
+      font-weight: 600;
+    }
+
+    /* ===== Self Evaluation ===== */
+    .eval-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .eval-card {
+      padding: 22px 24px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: .22s;
+    }
+
+    .eval-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .eval-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+      background: var(--primary-light);
+    }
+
+    .eval-content h4 {
+      font-size: 15px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .eval-content p {
+      font-size: 13.5px;
+      color: var(--text-light);
+      text-align: justify;
+    }
+
+    /* ===== Contact ===== */
+    .contact-card {
+      position: relative;
+      overflow: hidden;
+      padding: 40px 44px;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(255, 255, 255, .14) 0, transparent 26%),
+        radial-gradient(circle at 95% 85%, rgba(255, 255, 255, .10) 0, transparent 22%),
+        radial-gradient(circle at 10% 80%, rgba(255, 255, 255, .08) 0, transparent 20%),
+        linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 55%, #3278b8 100%);
+      color: #fff;
+      box-shadow: 0 18px 40px rgba(15, 45, 74, .22);
+    }
+
+    .contact-card::after {
+      content: "";
+      position: absolute;
+      top: -50%; right: -50%;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,.05) 0%, transparent 60%);
+      animation: float-circle 10s ease-in-out infinite;
+    }
+
+    .contact-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-desc {
+      font-size: 15px;
+      color: rgba(255, 255, 255, .88);
+      margin-bottom: 24px;
+      max-width: 680px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 20px;
+    }
+
+    .contact-item {
+      padding: 18px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .09);
+      border: 1px solid rgba(255, 255, 255, .18);
+      transition: .2s;
+    }
+
+    .contact-item:hover {
+      background: rgba(255, 255, 255, .16);
+    }
+
+    .contact-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, .72);
+      margin-bottom: 4px;
+    }
+
+    .contact-value {
+      font-size: 15px;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .contact-actions {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 12px;
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      text-align: center;
+      padding: 26px 0 40px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-light);
+      transition: .2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* ===== Back to Top ===== */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(26, 74, 122, .3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: .3s;
+      z-index: 999;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ===== Scroll Animations ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .fade-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .fade-right {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .fade-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    strong { color: var(--text); }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .about-grid,
+      .project-grid,
+      .contact-grid,
+      .objective-content,
+      .eval-grid,
+      .cert-grid,
+      .hobbies-grid {
+        grid-template-columns: 1fr;
+      }
+      .skills-grid, .strengths-grid { grid-template-columns: 1fr 1fr; }
+      .intern-item { grid-template-columns: 1fr; }
+      .quick-grid, .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .container { width: min(100% - 24px, var(--max-w)); }
+      .navbar-inner {
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px 0;
+      }
+      .nav-right {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .hero-title { font-size: 32px; }
+      .hero-title .typed-cursor { height: 30px; }
+      .quick-grid, .skills-grid, .contact-grid, .stats-grid,
+      .strengths-grid, .cert-grid, .eval-grid, .hobbies-grid { grid-template-columns: 1fr; }
+      .nav-links { justify-content: center; gap: 10px; }
+      .objective-card { padding: 24px 20px; }
+      .contact-card { padding: 28px 22px; }
+      .section-title { font-size: 24px; }
+      .stat-number { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <div class="nav-brand">
+        <div class="nav-brand-dot"></div>
+        <span data-zh="王洋 · Portfolio" data-en="Wang Yang · Portfolio"></span>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#objective" data-zh="求职意向" data-en="Objective"></a>
+          <a href="#about"     data-zh="关于我"   data-en="About"></a>
+          <a href="#strengths" data-zh="核心优势" data-en="Strengths"></a>
+          <a href="#education" data-zh="教育经历" data-en="Education"></a>
+          <a href="#projects"  data-zh="项目经历" data-en="Projects"></a>
+          <a href="#internship" data-zh="实习经历" data-en="Internship"></a>
+          <a href="#skills"    data-zh="专业技能" data-en="Skills"></a>
+          <a href="#certs"     data-zh="证书语言" data-en="Certifications"></a>
+          <a href="#hobbies"   data-zh="兴趣爱好" data-en="Hobbies"></a>
+          <a href="#contact"   data-zh="联系我"   data-en="Contact"></a>
+        </nav>
+        <div class="lang-switch">
+          <button class="lang-btn active" onclick="setLang('zh', this)">中文</button>
+          <button class="lang-btn" onclick="setLang('en', this)">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="container hero-grid">
+
+        <div class="card hero-left fade-left">
+          <div class="hero-left-body">
+            <div class="hero-photo">
+              <img src="file:///D:/jobsearching/self1.jpg" alt="Wang Yang" />
+            </div>
+
+            <div class="hero-side-block">
+              <div class="hero-side-title" data-zh="📋 基础信息" data-en="📋 Profile"></div>
+              <div class="hero-side-list">
+                <div><strong data-zh="学历" data-en="Degree"></strong><span data-zh="硕士" data-en="Master's"></span></div>
+                <div><strong data-zh="学校" data-en="University"></strong><span data-zh="新南威尔士大学" data-en="UNSW Sydney"></span></div>
+                <div><strong data-zh="状态" data-en="Status"></strong><span data-zh="应届生 · 2026届" data-en="Fresh Graduate · Class of 2026"></span></div>
+                <div><strong data-zh="地区" data-en="Target"></strong><span data-zh="江浙沪（接受出差）" data-en="Yangtze River Delta (Travel OK)"></span></div>
+                <div><strong data-zh="到岗" data-en="Available"></strong><span data-zh="随时可到岗" data-en="Immediately Available"></span></div>
+              </div>
+            </div>
+
+            <div class="hero-side-block">
+              <div class="hero-side-title" data-zh="🏷️ 关键词" data-en="🏷️ Keywords"></div>
+              <div class="hero-side-list">
+                <div data-zh="能源系统与控制 / 潮流计算" data-en="Energy Systems &amp; Control / Power Flow"></div>
+                <div data-zh="电力电子 / FPGA / Verilog" data-en="Power Electronics / FPGA / Verilog"></div>
+                <div data-zh="PowerWorld / PSCAD / Maxwell" data-en="PowerWorld / PSCAD / Maxwell"></div>
+                <div data-zh="PIC 测试 / AI 应用 / 本地部署" data-en="PIC Testing / AI Usage / Local Deployment"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-main fade-right">
+          <div class="hero-kicker" data-zh="Electrical Engineering Portfolio" data-en="Electrical Engineering Portfolio"></div>
+          <h1 class="hero-title">
+            <span id="heroTyped"></span><span class="typed-cursor"></span>
+          </h1>
+          <div class="hero-subtitle"
+               data-zh="新南威尔士大学电气工程硕士 · 关注能源系统、控制与工程实践"
+               data-en="UNSW Electrical Engineering Master's · Energy Systems, Control &amp; Engineering Practice"></div>
+          <p class="hero-desc"
+             data-zh="我具备扎实的电气工程基础，研究方向覆盖能源系统与控制、电力系统潮流计算、电力电子、光电测试与工程仿真。除了专业理论和实验训练，我也重视工程落地能力，能够在仿真分析、硬件平台、测试流程与现场实践之间建立联系，并通过 AI 工具提升学习、编码、设计和文档工作的效率。"
+             data-en="I have a solid foundation in Electrical Engineering, with experience spanning energy systems and control, power-flow analysis, power electronics, photonic testing, and engineering simulation. Beyond theory and lab work, I value engineering execution — connecting simulation, hardware platforms, testing workflows, and field practice — while using AI tools to improve learning, coding, design, and documentation efficiency."></p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact" data-zh="📬 联系我" data-en="📬 Contact Me"></a>
+            <a class="btn btn-secondary" href="#projects" data-zh="📂 查看项目" data-en="📂 View Projects"></a>
+            <a class="btn btn-secondary" href="#skills" data-zh="🛠️ 技能总览" data-en="🛠️ Skills Overview"></a>
+          </div>
+
+          <div class="quick-grid">
+            <div class="quick-item">
+              <div class="quick-label" data-zh="研究方向" data-en="Research Focus"></div>
+              <div class="quick-value" data-zh="能源系统 / 控制 / 潮流分析" data-en="Energy Systems / Control / Power Flow"></div>
+            </div>
+            <div class="quick-item">
+              <div class="quick-label" data-zh="工程能力" data-en="Engineering Strength"></div>
+              <div class="quick-value" data-zh="仿真建模 / 硬件开发 / 测试验证" data-en="Simulation / Hardware / Testing"></div>
+            </div>
+            <div class="quick-item">
+              <div class="quick-label" data-zh="软件工具" data-en="Tools"></div>
+              <div class="quick-value" data-zh="PowerWorld / PSCAD / Matlab / RSoft" data-en="PowerWorld / PSCAD / Matlab / RSoft"></div>
+            </div>
+            <div class="quick-item">
+              <div class="quick-label" data-zh="附加能力" data-en="Additional Strength"></div>
+              <div class="quick-value" data-zh="AI 应用 / 本地部署 / 英文汇报" data-en="AI / Local Deployment / English Presentation"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== STATS BAR ===== -->
+    <section class="stats-bar">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item fade-up">
+            <div class="stat-icon">🎓</div>
+            <div class="stat-number"><span class="counter" data-target="2">0</span></div>
+            <div class="stat-label" data-zh="学历背景（本科 + 硕士）" data-en="Degrees (B.Sc. + M.Eng.)"></div>
+          </div>
+          <div class="stat-item fade-up" style="transition-delay:.1s">
+            <div class="stat-icon">💼</div>
+            <div class="stat-number"><span class="counter" data-target="4">0</span></div>
+            <div class="stat-label" data-zh="实习经历" data-en="Internship Experiences"></div>
+          </div>
+          <div class="stat-item fade-up" style="transition-delay:.2s">
+            <div class="stat-icon">🔬</div>
+            <div class="stat-number"><span class="counter" data-target="4">0</span></div>
+            <div class="stat-label" data-zh="核心项目" data-en="Key Projects"></div>
+          </div>
+          <div class="stat-item fade-up" style="transition-delay:.3s">
+            <div class="stat-icon">🛠️</div>
+            <div class="stat-number"><span class="counter" data-target="10">0</span><span class="stat-suffix">+</span></div>
+            <div class="stat-label" data-zh="专业工具" data-en="Professional Tools"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CAREER OBJECTIVE ===== -->
+    <section class="section" id="objective">
+      <div class="container">
+        <div class="section-header fade-up">
+          <div class="section-kicker" data-zh="CAREER OBJECTIVE" data-en="CAREER OBJECTIVE"></div>
+          <h2 class="section-title" data-zh="求职意向" data-en="Career Objective"></h2>
+          <p class="section-desc"
+             data-zh="期望在电力系统、电气设计、电力电子或技术研发等方向获得发展机会，并在专业领域持续深耕。"
+             data-en="Seeking opportunities in power systems, electrical design, power electronics, or R&amp;D, with a commitment to deep, long-term professional growth."></p>
+        </div>
+
+        <div class="objective-card fade-up">
+          <div class="objective-content">
+            <div class="objective-main">
+              <h3 data-zh="🎯 我的求职方向" data-en="🎯 What I'm Looking For"></h3>
+              <p data-zh="我希望加入一个重视技术深度与工程落地的团队，在电力系统分析、电气设计、电力电子研发、仿真建模或测试验证等方向开展工作。我具备从理论到实践的完整学习路径，拥有跨领域知识储备，能够适应多样化的技术任务，并希望在持续学习中实现个人价值与团队贡献的平衡。"
+                 data-en="I'm looking to join a team that values technical depth and engineering execution, working in areas like power-system analysis, electrical design, power-electronics R&amp;D, simulation modelling, or test validation. I bring a complete learning path from theory to practice, interdisciplinary knowledge, and adaptability to diverse technical challenges."></p>
+              <div class="objective-tags">
+                <span class="obj-tag blue" data-zh="⚡ 电力系统" data-en="⚡ Power Systems"></span>
+                <span class="obj-tag teal" data-zh="🔧 电气设计" data-en="🔧 Electrical Design"></span>
+                <span class="obj-tag purple" data-zh="💡 电力电子" data-en="💡 Power Electronics"></span>
+                <span class="obj-tag orange" data-zh="🔬 技术研发" data-en="🔬 R&amp;D"></span>
+              </div>
+            </div>
+
+            <div class="objective-details">
+              <div class="obj-detail">
+                <div class="obj-detail-icon blue">📍</div>
+                <div class="obj-detail-text">
+                  <h4 data-zh="期望地区" data-en="Preferred Location"></h4>
+                  <p data-zh="江浙沪地区，接受出差与短期外派" data-en="Yangtze River Delta area; open to travel and short-term assignments"></p>
+                </div>
+              </div>
+              <div class="obj-detail">
+                <div class="obj-detail-icon teal">🏢</div>
+                <div class="obj-detail-text">
+                  <h4 data-zh="期望行业" data-en="Preferred Industry"></h4>
+                  <p data-zh="电力/能源、电气设备制造、工程设计院、新能源/储能、半导体/光电" data-en="Power/Energy, Electrical Manufacturing, Engineering Design, New Energy/Storage, Semiconductor/Photonics"></p>
+                </div>
+              </div>
+              <div class="obj-detail">
+                <div class="obj-detail-icon purple">🎯</div>
+                <div class="obj-detail-text">
+                  <h4 data-zh="期望岗位" data-en="Target Positions"></h4>
+                  <p data-zh="电气工程师 / 电力系统工程师 / 电力电子工程师 / 硬件工程师 / 技术研发工程师" data-en="Electrical Engineer / Power Systems Engineer / Power Electronics Engineer / Hardware Engineer / R&amp;D Engineer"></p>
+                </div>
+              </div>
+              <div class="obj-detail">
+                <div class="obj-detail-icon orange">📅</div>
+                <div class="obj-detail-text">
+                  <h4 data-zh="到岗时间" data-en="Availability"></h4>
+                  <p data-zh="2026年5月毕业，可提前实习；毕业后随时到岗" data-en="Graduating May 2026; available for early internship and immediate start after graduation"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header fade-up">
+          <div class="section-kicker" data-zh="ABOUT ME" data-en="ABOUT ME"></div>
+          <h2 class="section-title" data-zh="关于我" data-en="About Me"></h2>
+          <p class="section-desc"
+             data-zh="具备扎实的电气工程基础与较强的工程实践意识，能够在理论学习、软件仿真、硬件平台与实际应用之间形成闭环。"
+             data-en="Grounded in Electrical Engineering with strong practical awareness, capable of connecting theory, simulation, hardware platforms, and real-world engineering tasks."></p>
+        </div>
+
+        <div class="about-grid">
+          <div class="card fade-left">
+            <div class="card-body about-text">
+              <p data-zh="研究生阶段，我主要围绕能源系统与控制方向开展学习，涉及 AC-DC 转换、线性控制与状态反馈、高压系统分析、信号处理、市场调度与潮流计算等内容。与此同时，我也在光电测试方向积累了项目经验，特别是在 PIC 测试与单模光纤自动化对准方面进行了较深入的实践。"
+                 data-en="During my master's study, I focused on energy systems and control, covering AC-DC conversion, linear control and state-feedback, high-voltage system analysis, signal processing, market dispatch, and power-flow analysis. In parallel, I also built hands-on experience in photonic testing, especially in PIC testing and automated single-mode fiber alignment."></p>
+
+              <p data-zh="在课程与项目之外，我持续扩展自己的工具链能力，包括 PSCAD、PowerWorld Simulation、Matlab/Simulink、RSoft、Maxwell、Vivado、Vitis、Cadence Virtuoso 以及 AutoCAD 等，并将这些工具用于建模、仿真、分析、设计和测试验证。"
+                 data-en="Beyond coursework and projects, I continuously expand my technical toolkit, including PSCAD, PowerWorld Simulation, Matlab/Simulink, RSoft, Maxwell, Vivado, Vitis, Cadence Virtuoso, and AutoCAD, and I apply them to modelling, simulation, analysis, design, and test validation."></p>
+
+              <p data-zh="我也重视新工具在工程中的实际价值。当前我能够使用 AI 进行专业学习、代码编写、方案设计与文档整理，并具备本地部署 AI 模型的基础能力，希望将其进一步应用于开发辅助、知识管理和工程效率提升场景。"
+                 data-en="I also value the practical role of new tools in engineering. I can already use AI for professional learning, coding, solution design, and documentation, and I have basic experience in locally deploying AI models. I aim to further apply these capabilities to development support, knowledge management, and engineering-efficiency improvement."></p>
+            </div>
+          </div>
+
+          <div class="highlights fade-right">
+            <div class="highlight">
+              <h4><span>🧩</span> <span data-zh="复合知识结构" data-en="Composite Knowledge Structure"></span></h4>
+              <p data-zh="具备电气系统、控制理论、电力电子、光电测试与硬件开发等多方向知识，适合跨学科工程岗位。"
+                 data-en="Strong across electrical systems, control theory, power electronics, photonic testing, and hardware development — suitable for interdisciplinary engineering roles."></p>
+            </div>
+            <div class="highlight teal">
+              <h4><span>⚙️</span> <span data-zh="实践与落地能力" data-en="Hands-on &amp; Implementation Ability"></span></h4>
+              <p data-zh="熟悉仿真分析、平台搭建、测试验证及现场工作流程，能较快完成从理论到执行的转换。"
+                 data-en="Familiar with simulation analysis, platform setup, testing, validation, and field workflows, enabling efficient transition from theory to execution."></p>
+            </div>
+            <div class="highlight purple">
+              <h4><span>📈</span> <span data-zh="持续学习意识" data-en="Continuous Growth Mindset"></span></h4>
+              <p data-zh="适应力强，愿意接受新任务、新工具与新场景挑战，具备持续成长和长期投入的意识。"
+                 data-en="Highly adaptable and open to new tasks, tools, and scenarios, with a strong long-term growth mindset."></p>
+            </div>
+            <div class="highlight orange">
+              <h4><span>🤖</span> <span data-zh="AI 驱动的工程效率" data-en="AI-Driven Engineering Efficiency"></span></h4>
+              <p data-zh="善于利用 AI 工具辅助学习、编码、设计与文档整理，具备 AI 本地部署的基础能力，能有效提升工作效率。"
+                 data-en="Skilled in leveraging AI tools for learning, coding, design, and documentation; basic experience with local AI deployment to boost engineering productivity."></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CORE STRENGTHS ===== -->
+    <section class="section" id="strengths">
+      <div class="container">
+        <div class="section-header fade-up">
+          <div class="section-kicker" data-zh="CORE STRENGTHS" data-en="CORE STRENGTHS"></div>
+          <h2 class="section-title" data-zh="核心优势" data-en="Core Strengths"></h2>
+          <p class="section-desc"
+             data-zh="从专业能力到综合素质，我能为团队带来以下核心价值。"
+             data-en="From professional skills to personal qualities, here's the core value I bring to a team."></p>
+        </div>
+
+        <div class="strengths-grid">
+          <div class="strength-card fade-up">
+            <div class="strength-icon blue">⚡</div>
+            <h4 data-zh="电力系统全链路认知" data-en="End-to-End Power System Understanding"></h4>
+            <p data-zh="从高压系统分析、潮流计算到配电站设计与运维，覆盖电力系统"设计—仿真—建设—运维"全链路，理论与实践相结合。"
+               data-en="Covering high-voltage analysis, power-flow calculation, substation design, and O&amp;M — bridging the full 'design → simulation → construction → operation' chain."></p>
+          </div>
+          <div class="strength-card fade-up" style="transition-delay:.1s">
+            <div class="strength-icon teal">🔗</div>
+            <h4 data-zh="跨学科知识融合" data-en="Interdisciplinary Integration"></h4>
+            <p data-zh="本科光电 + 硕士电力/控制，跨越光学、电子、信号、控制、电力多个学科，具备复合型工程思维。"
+               data-en="Undergraduate in photonics + Master's in power/control, spanning optics, electronics, signal processing, control theory, and power systems with a multidisciplinary engineering mindset."></p>
+          </div>
+          <div class="strength-card fade-up" style="transition-delay:.2s">
+            <div class="strength-icon purple">🛠️</div>
+            <h4 data-zh="丰富的工具链能力" data-en="Rich Toolchain Competence"></h4>
+            <p data-zh="掌握 10+ 专业工具（PowerWorld、PSCAD、Matlab、Maxwell、Vivado、AutoCAD 等），能快速适配不同项目需求。"
+               data-en="Proficient in 10+ professional tools (PowerWorld, PSCAD, Matlab, Maxwell, Vivado, AutoCAD, etc.), enabling quick adaptation to diverse project requirements."></p>
+          </div>
+          <div class="strength-card fade-up" style="transition-delay:.1s">
+            <div class="strength-icon orange">🏭</div>
+            <h4 data-zh="真实工程场景经验" data-en="Real-World Engineering Experience"></h4>
+            <p data-zh="具备多段实习经历，涵盖电力设计院、设备制造厂、运维现场及无人机巡检，对电力行业运作逻辑有直观认知。"
+               data-en="Multiple internships spanning design institutes, manufacturing plants, O&amp;M sites, and UAV inspection — providing firsthand understanding of how the power industry operates."></p>
+          </div>
+          <div class="strength-card fade-up" style="transition-delay:.2s">
+            <div class="strength-icon blue">🌏</div>
+            <h4 data-zh="国际视野与英文能力" data-en="Global Perspective &amp; English Proficiency"></h4>
+            <p data-zh="海外硕士培养，具备英文技术文献阅读、科技写作与英文汇报交流能力，能够适应国际化工作环境。"
+               data-en="Trained overseas with strong English capabilities in technical reading, scientific writing, and presentation — ready for international work environments."></p>
+          </div>
+          <div class="strength-card fade-up" style="transition-delay:.3s">
+            <div class="strength-icon teal">🚀</div>
+            <h4 data-zh="主动学习与执行力" data-en="Proactive Learning &amp; Execution"></h4>
+            <p data-zh="高度自驱，面对新任务能快速学习、主动推进、按质完成；乐于接受挑战与加班，具备吃苦耐劳精神。"
+               data-en="Highly self-driven, quick to learn, proactive in execution, and committed to quality delivery. Embraces challenges and demonstrates strong work ethic."></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section class="section" id="education">
+      <div class="container">
+        <div class="section-header fade-up">
+          <div class="section-kicker" data-zh="EDUCATION" data-en="EDUCATION"></div>
+          <h2 class="section-title" data-zh="教育经历" data-en="Education"></h2>
+        </div>
+
+        <div class="card fade-up">
+          <div class="card-body">
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-date" data-zh="2024.05 - 2026.05" data-en="May 2024 – May 2026"></div>
+                <div class="timeline-title" data-zh="新南威尔士大学 (UNSW Sydney)" data-en="University of New South Wales (UNSW Sydney)"></div>
+                <div class="timeline-subtitle" data-zh="电气工程 · 硕士 · 能源系统与控制方向" data-en="Master of Engineering · Electrical Engineering · Energy Systems &amp; Control"></div>
+                <div class="timeline-desc"
+                     data-zh="主攻能源系统与控制方向，系统学习 AC-DC 转换、线性控制及状态反馈、高压系统分析、信号处理与潮流计算等内容；同时接触嵌入式系统与 FPGA 基础开发，掌握 ARM 架构、Zedboard 基本应用、Verilog 语言及 Vivado、Vitis 工具链。"
+                     data-en="Focused on Energy Systems and Control, covering AC-DC conversion, linear control and state-feedback, high-voltage system analysis, signal processing, and power-flow studies. Also gained embedded-system and FPGA fundamentals, including ARM architecture, Zedboard basics, Verilog, and the Vivado/Vitis toolchain."></div>
+                <div class="timeline-courses">
+                  <span class="course-tag" data-zh="能源系统" data-en="Energy Systems"></span>
+                  <span class="course-tag" data-zh="控制理论" data-en="Control Theory"></span>
+                  <span class="course-tag" data-zh="电力电子" data-en="Power Electronics"></span>
+                  <span class="course-tag" data-zh="高压技术" data-en="High Voltage"></span>
+                  <span class="course-tag" data-zh="信号处理" data-en="Signal Processing"></span>
+                  <span class="course-tag" data-zh="嵌入式系统" data-en="Embedded Systems"></span>
+                  <span class="course-tag" data-zh="FPGA开发" data-en="FPGA Dev"></span>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-date" data-zh="2019.09 - 2023.06" data-en="Sep 2019 – Jun 2023"></div>
+                <div class="timeline-title" data-zh="南京邮电大学 (NJUPT)" data-en="Nanjing University of Posts &amp; Telecommunications (NJUPT)"></div>
+                <div class="timeline-subtitle" data-zh="光电信息科学与工程 · 学士" data-en="B.Sc. · Optoelectronic Information Science &amp; Engineering"></div>
+                <div class="timeline-desc"
+                     data-zh="系统学习应用光学、光电探测、信号与系统、数字/模拟电子技术及电磁场等课程，构建光电、信号处理与电子电路基础，毕业设计方向为光子晶体分束器件设计。"
+                     data-en="Studied applied optics, photoelectric detection, signals &amp; systems, digital/analogue electronics, and electromagnetic fields. Thesis focused on photonic crystal beam-splitter design."></div>
+                <div class="timeline-courses">
+                  <span class="course-tag" data-zh="应用光学" data-en="Applied Optics"></span>
+                  <span class="course-tag" data-zh="光电探测" data-en="Photodetection"></span>
+                  <span class="course-tag" data-zh="信号与系统" data-en="Signals &amp; Systems"></span>
+                  <span class="course-tag" data-zh="数字电子" data-en="Digital Electronics"></span>
+                  <span class="course-tag" data-zh="模拟电子" data-en="Analogue Electronics"></span>
+                  <span class="course-tag" data-zh="电磁场" data-en="EM Fields"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header fade-up">
+          <div class="section-kicker" data-zh="PROJECTS" data-en="PROJECTS"></div>
+          <h2 class="section-title" data-zh="项目经历" data-en="Projects"></h2>
+          <p class="section-desc"
+             data-zh="围绕光电测试、信号处理、电力系统分析与器件设计等方向开展项目实践。"
+             data-en="Project experience spanning photonic testing, signal processing, power-system analysis, and device design."></p>
+        </div>
+
+        <div class="project-grid">
+          <div class="project-card fade-up">
+            <div class="project-top">
+              <div class="project-line line1"></div>
+              <div class="project-date" data-zh="2025.06 - 2026.05" data-en="Jun 2025 – May 2026"></div>
+              <div class="project-title" data-zh="单模光纤对齐自动化及 PIC 测试" data-en="Single-Mode Fiber Alignment Automation &amp; PIC Testing"></div>
+            </div>
+            <div class="project-body"
+                 data-zh="开发光纤对齐与自动化测试系统，搭建 Thorlabs MAX606 精密运动平台与传感器反馈链路，结合优化算法实现高精度对准与 PIC 功能测试。项目重点在于提升耦合效率、重复性与测试稳定性，为后续自动化测试流程提供基础。"
+                 data-en="Developed an automated fiber-alignment and PIC testing system using the Thorlabs MAX606 precision motion platform with sensor-feedback integration. Optimization algorithms were used for high-accuracy alignment and functional testing."></div>
+            <div class="project-tags">
+              <span class="project-tag blue">Thorlabs MAX606</span>
+              <span class="project-tag teal" data-zh="自动化对准" data-en="Auto-Alignment"></span>
+              <span class="project-tag purple">PIC Testing</span>
+              <span class="project-tag orange" data-zh="优化算法" data-en="Optimization"></span>
+            </div>
+          </div>
+
+          <div class="project-card fade-up" style="transition-delay:.1s">
+            <div class="project-top">
+              <div class="project-line line2"></div>
+              <div class="project-date" data-zh="2025.06 - 2025.08" data-en="Jun 2025 – Aug 2025"></div>
+              <div class="project-title" data-zh="信号处理和滤波电路设计" data-en="Signal Processing &amp; Filter Circuit Design"></div>
+            </div>
+            <div class="project-body"
+                 data-zh="采用 SOGI-PLL 锁相环控制策略实现三相到单相处理，独立完成信号放大与噪声滤波电路设计及封装，并利用 FFT 进行谐波检测与频谱分析。该项目强化了我在控制、电路设计和信号分析方面的综合能力。"
+                 data-en="Applied a SOGI-PLL strategy for three-phase to single-phase signal processing, independently designed signal-amplification and noise-filter circuits, and conducted FFT-based harmonic detection."></div>
+            <div class="project-tags">
+              <span class="project-tag blue">SOGI-PLL</span>
+              <span class="project-tag teal">FFT</span>
+              <span class="project-tag purple" data-zh="滤波电路" data-en="Filter Circuit"></span>
+              <span class="project-tag orange" data-zh="谐波检测" data-en="Harmonic Detection"></span>
+            </div>
+          </div>
+
+          <div class="project-card fade-up">
+            <div class="project-top">
+              <div class="project-line line3"></div>
+              <div class="project-date" data-zh="2024.09 - 2024.12" data-en="Sep 2024 – Dec 2024"></div>
+              <div class="project-title" data-zh="电力系统潮流计算与经济调度" data-en="Power-Flow Calculation &amp; Economic Dispatch"></div>
+            </div>
+            <div class="project-body"
+                 data-zh="采用 GAUSS-SEIDEL 方法构建 5 节点系统 Y-BUS 矩阵，并结合 PowerWorld Simulation 开展潮流仿真，验证潮流计算收敛性与网络稳定性；同时探索 LAMBDA 迭代与梯度搜索等经济调度方法，实现多机组发电成本优化分配。"
+                 data-en="Constructed a 5-bus Y-BUS matrix using the GAUSS-SEIDEL method and performed power-flow simulation in PowerWorld to verify convergence and network stability. Also explored economic dispatch methods."></div>
+            <div class="project-tags">
+              <span class="project-tag blue">Gauss-Seidel</span>
+              <span class="project-tag teal">PowerWorld</span>
+              <span class="project-tag purple">Y-BUS</span>
+              <span class="project-tag orange" data-zh="经济调度" data-en="Economic Dispatch"></span>
+            </div>
+          </div>
+
+          <div class="project-card fade-up" style="transition-delay:.1s">
+            <div class="project-top">
+              <div class="project-line line4"></div>
+              <div class="project-date" data-zh="2023.02 - 2023.06" data-en="Feb 2023 – Jun 2023"></div>
+              <div class="project-title" data-zh="基于优化算法的 1×5 二维光子晶体分束器设计与研究" data-en="1×5 2-D Photonic Crystal Beam Splitter Design with Optimization"></div>
+            </div>
+            <div class="project-body"
+                 data-zh="基于 RSoft 平台设计二维光子晶体分束器，应用下山单纯型优化算法实现灵活分光比，并提升器件性能。该项目帮助我建立了从器件建模、仿真分析到优化设计的完整思路。"
+                 data-en="Designed a 2-D photonic crystal beam splitter in RSoft and applied the downhill simplex optimization algorithm to achieve flexible splitting ratios."></div>
+            <div class="project-tags">
+              <span class="project-tag blue">RSoft</span>
+              <span class="project-tag teal" data-zh="光子晶体" data-en="Photonic Crystal"></span>
+              <span class="project-tag purple" data-zh="优化算法" data-en="Optimization"></span>
+              <span class="project-tag orange" data-zh="分束器设计" data-en="Beam Splitter"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== INTERNSHIP ===== -->
+    <section class="section" id="internship">
+      <div class="container">
+        <div class="section-header fade-up">
+          <div class="section-kicker" data-zh="INTERNSHIP" data-en="INTERNSHIP"></div>
+          <h2 class="section-title" data-zh="实习经历" data-en="Internship Experience"></h2>
+          <p class="section-desc"
+             data-zh="涵盖电力设计、设备制造、运维巡检与无人机高空监测等多个方向，对电力行业形成了完整认知。"
+             data-en="Spanning power design, equipment manufacturing, O&amp;M inspection, and UAV monitoring — building a comprehensive understanding of the power industry."></p>
+        </div>
+
+        <div class="intern-grid">
+          <div class="intern-item fade-up">
+            <div>
+              <div class="intern-company"
+                   data-zh="淮安新业电力设计咨询有限公司（国网下属设计院）"
+                   data-en="Huai'an Xinye Power Design &amp; Consulting (State Grid Affiliated)"></div>
+              <div class="intern-role" data-zh="技术实习生 · 无人机巡检方向" data-en="Technical Intern · UAV Inspection"></div>
+              <div class="intern-date" data-zh="2026.02" data-en="Feb 2026"></div>
+            </div>
+            <div>
+              <div class="intern-desc"
+                   data-zh="协助技术人员远程操作无人机开展电力线路高空监测，重点巡检配电站、输电线路及杆塔运行状态，排查破损、异物缠绕等隐患；整理飞行监测数据，筛选图像并标注疑似隐患点，提交后续审核。"
+                   data-en="Assisted engineers in remotely operating UAVs for aerial inspection of power facilities. Identified damage and foreign-object hazards, organized flight data and labeled defect points for review."></div>
+              <div class="intern-highlights">
+                <span class="intern-hl-tag" data-zh="无人机巡检" data-en="UAV Inspection"></span>
+                <span class="intern-hl-tag" data-zh="隐患排查" data-en="Hazard Detection"></span>
+                <span class="intern-hl-tag" data-zh="数据标注" data-en="Data Labeling"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="intern-item fade-up">
+            <div>
+              <div class="intern-company" data-zh="江苏国宏电力科技有限公司" data-en="Jiangsu Guohong Power Technology Co., Ltd."></div>
+              <div class="intern-role" data-zh="技术实习生 · 配电柜制造" data-en="Technical Intern · Switchgear Manufacturing"></div>
+              <div class="intern-date" data-zh="2026.01 - 2026.02" data-en="Jan – Feb 2026"></div>
+            </div>
+            <div>
+              <div class="intern-desc"
+                   data-zh="进入配电柜生产车间，熟悉内部结构、核心元器件及标准化装配流程；参与通电测试与绝缘测试，了解电气制造行业标准、质量控制逻辑与安全操作规范。"
+                   data-en="Worked in a switchgear production workshop. Participated in energization and insulation tests while learning quality-control logic and safety practices."></div>
+              <div class="intern-highlights">
+                <span class="intern-hl-tag" data-zh="配电柜装配" data-en="Switchgear Assembly"></span>
+                <span class="intern-hl-tag" data-zh="通电测试" data-en="Energization Test"></span>
+                <span class="intern-hl-tag" data-zh="质量控制" data-en="Quality Control"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="intern-item fade-up">
+            <div>
+              <div class="intern-company" data-zh="苏州华安普电力科技股份有限公司" data-en="Suzhou Hua'anpu Power Technology Co., Ltd."></div>
+              <div class="intern-role" data-zh="技术实习生 · 电力运维" data-en="Technical Intern · Power O&amp;M"></div>
+              <div class="intern-date" data-zh="2026.01" data-en="Jan 2026"></div>
+            </div>
+            <div>
+              <div class="intern-desc"
+                   data-zh="跟随运维团队开展电力设备日常巡检，监测变压器、开关柜等设备运行状态，记录温度、三相电流、无功功率等关键参数并协助排查隐患；同时参与运维台账整理，提升对运维流程规范化的理解。"
+                   data-en="Joined the O&amp;M team in routine inspections of transformers and switchgear, monitoring status and recording temperature, three-phase current, and reactive power."></div>
+              <div class="intern-highlights">
+                <span class="intern-hl-tag" data-zh="设备巡检" data-en="Equipment Inspection"></span>
+                <span class="intern-hl-tag" data-zh="参数监测" data-en="Parameter Monitoring"></span>
+                <span class="intern-hl-tag" data-zh="运维台账" data-en="Maintenance Records"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="intern-item fade-up">
+            <div>
+              <div class="intern-company" data-zh="江苏中达电力设计有限公司" data-en="Jiangsu Zhongda Power Design Co., Ltd."></div>
+              <div class="intern-role" data-zh="技术实习生 · 电力设计" data-en="Technical Intern · Power Design"></div>
+              <div class="intern-date" data-zh="2025.12 - 2026.01" data-en="Dec 2025 – Jan 2026"></div>
+            </div>
+            <div>
+              <div class="intern-desc"
+                   data-zh="协助完成 10kV 及以下配电站图纸绘制，熟练运用 AutoCAD 绘制一次回路图；参与现场勘查辅助工作，了解配电站设计流程、现场信息采集方式及电力设计相关标准规范。"
+                   data-en="Assisted in preparing drawings for substations below 10 kV using AutoCAD. Participated in field surveys and learned substation design procedures and standards."></div>
+              <div class="intern-highlights">
+                <span class="intern-hl-tag">AutoCAD</span>
+                <span class="intern-hl-tag" data-zh="一次回路图" data-en="Primary Circuit"></span>
+                <span class="intern-hl-tag" data-zh="现场勘查" data-en="Field Survey"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-header fade-up">
+          <div class="section-kicker" data-zh="SKILLS" data-en="SKILLS"></div>
+          <h2 class="section-title" data-zh="专业技能" data-en="Professional Skills"></h2>
+          <p class="section-desc"
+             data-zh="围绕电力系统、电力电子、仿真建模、硬件开发、光电测试与 AI 应用形成较完整的能力结构。"
+             data-en="A broad skill set spanning power systems, power electronics, simulation, hardware, photonics, and AI."></p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-card c1 fade-up">
+            <div class="skill-title"><span>⚡</span> <span data-zh="电力系统与仿真" data-en="Power Systems &amp; Simulation"></span></div>
+            <div class="skill-body"
+                 data-zh="掌握电气系统原理、高压技术及继电保护；熟悉 PSCAD 与 PowerWorld Simulation，可开展基础电力系统建模、简单设计与潮流计算；熟悉 Ansys Maxwell 进行电缆与电磁场分析。"
+                 data-en="Strong in electrical-system principles, high-voltage technology, and relay protection; familiar with PSCAD and PowerWorld Simulation for modelling and power-flow studies."></div>
+            <div class="skill-bars">
+              <div class="skill-bar-item"><span class="skill-bar-label">PowerWorld</span><div class="skill-bar-track"><div class="skill-bar-fill blue" data-width="85%"></div></div></div>
+              <div class="skill-bar-item"><span class="skill-bar-label">PSCAD</span><div class="skill-bar-track"><div class="skill-bar-fill blue" data-width="80%"></div></div></div>
+              <div class="skill-bar-item"><span class="skill-bar-label">Maxwell</span><div class="skill-bar-track"><div class="skill-bar-fill blue" data-width="70%"></div></div></div>
+            </div>
+          </div>
+
+          <div class="skill-card c2 fade-up" style="transition-delay:.1s">
+            <div class="skill-title"><span>🔌</span> <span data-zh="电力电子与控制" data-en="Power Electronics &amp; Control"></span></div>
+            <div class="skill-body"
+                 data-zh="熟练使用 Matlab/Simulink 进行控制与电路仿真；掌握 Buck、Boost、Buck-Boost、Cuk、SEPIC、Flyback、Half/Full-Bridge 等多种 AC-DC 拓扑结构及其基本工作特性。"
+                 data-en="Proficient in Matlab/Simulink for control and circuit simulation; familiar with multiple AC-DC converter topologies including Buck, Boost, Buck-Boost, Cuk, SEPIC, Flyback, and Half/Full-Bridge configurations."></div>
+            <div class="skill-bars">
+              <div class="skill-bar-item"><span class="skill-bar-label">Matlab/Simulink</span><div class="skill-bar-track"><div class="skill-bar-fill teal" data-width="85%"></div></div></div>
+              <div class="skill-bar-item"><span class="skill-bar-label" data-zh="AC-DC拓扑" data-en="AC-DC Topology"></span><div class="skill-bar-track"><div class="skill-bar-fill teal" data-width="78%"></div></div></div>
+            </div>
+          </div>
+
+          <div class="skill-card c3 fade-up" style="transition-delay:.2s">
+            <div class="skill-title"><span>💻</span> <span data-zh="嵌入式与硬件开发" data-en="Embedded &amp; Hardware"></span></div>
+            <div class="skill-body"
+                 data-zh="掌握 ARM 架构与 FPGA（Zedboard）基本应用；熟悉 Verilog 语言、Vivado 与 Vitis 开发工具链；掌握 Cadence Virtuoso 版图绘制与 AutoCAD 制图。"
+                 data-en="Hands-on with ARM and FPGA (Zedboard); familiar with Verilog, Vivado/Vitis, Cadence Virtuoso, and AutoCAD."></div>
+            <div class="skill-bars">
+              <div class="skill-bar-item"><span class="skill-bar-label">Verilog</span><div class="skill-bar-track"><div class="skill-bar-fill purple" data-width="72%"></div></div></div>
+              <div class="skill-bar-item"><span class="skill-bar-label">AutoCAD</span><div class="skill-bar-track"><div class="skill-bar-fill purple" data-width="80%"></div></div></div>
+              <div class="skill-bar-item"><span class="skill-bar-label">Vivado</span><div class="skill-bar-track"><div class="skill-bar-fill purple" data-width="68%"></div></div></div>
+            </div>
+          </div>
+
+          <div class="skill-card c4 fade-up">
+            <div class="skill-title"><span>🔬</span> <span data-zh="光电与测试平台" data-en="Photonics &amp; Testing"></span></div>
+            <div class="skill-body"
+                 data-zh="熟练使用 RSoft 进行 PIC 设计与仿真，熟悉 Thorlabs 精密运动与测试平台，具备光纤对准、光电测试与实验平台搭建经验。"
+                 data-en="Skilled in PIC design with RSoft; experienced with Thorlabs platforms, fiber alignment, and lab setup."></div>
+            <div class="skill-bars">
+              <div class="skill-bar-item"><span class="skill-bar-label">RSoft</span><div class="skill-bar-track"><div class="skill-bar-fill orange" data-width="82%"></div></div></div>
+              <div class="skill-bar-item"><span class="skill-bar-label">Thorlabs</span><div class="skill-bar-track"><div class="skill-bar-fill orange" data-width="75%"></div></div></div>
+            </div>
+          </div>
+
+          <div class="skill-card c5 fade-up" style="transition-delay:.1s">
+            <div class="skill-title"><span>🤖</span> <span data-zh="编程与 AI 应用" data-en="Programming &amp; AI"></span></div>
+            <div class="skill-body"
+                 data-zh="具备 Python 编程能力；能够利用 AI 工具开展专业学习、代码编写、方案设计与文档整理，并具备本地部署 AI 模型的基础能力。"
+                 data-en="Python capable; uses AI tools for learning, coding, design, and docs; basic local AI deployment experience."></div>
+            <div class="skill-bars">
+              <div class="skill-bar-item"><span class="skill-bar-label">Python</span><div class="skill-bar-track"><div class="skill-bar-fill red" data-width="72%"></div></div></div>
+              <div class="skill-bar-item"><span class="skill-bar-label" data-zh="AI 应用" data-en="AI Usage"></span><div class="skill-bar-track"><div class="skill-bar-fill red" data-width="85%"></div></div></div>
+            </div>
+          </div>
+
+          <div class="skill-card c6 fade-up" style="transition-delay:.2s">
+            <div class="skill-title"><span>🌐</span> <span data-zh="语言与工程综合" data-en="Language &amp; General Engineering"></span></div>
+            <div class="skill-body"
+                 data-zh="熟悉配电站设计与运维、开关柜检测及无人机监测等工作内容；具备英文专业文献阅读、科技写作及英文汇报交流能力。"
+                 data-en="Experienced in substation design &amp; O&amp;M, switchgear inspection, and UAV monitoring; strong in English technical reading, writing, and presentation."></div>
+            <div class="skill-bars">
+              <div class="skill-bar-item"><span class="skill-bar-label" data-zh="英语读写" data-en="English R/W"></span><div class="skill-bar-track"><div class="skill-bar-fill dark" data-width="82%"></div></div></div>
+              <div class="skill-bar-item"><span class="skill-bar-label" data-zh="英文汇报" data-en="Presentation"></span><div class="skill-bar-track"><div class="skill-bar-fill dark" data-width="78%"></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CERTIFICATIONS & LANGUAGES ===== -->
+    <section class="section" id="certs">
+      <div class="container">
+        <div class="section-header fade-up">
+          <div class="section-kicker" data-zh="CERTIFICATIONS &amp; LANGUAGES" data-en="CERTIFICATIONS &amp; LANGUAGES"></div>
+          <h2 class="section-title" data-zh="证书与语言" data-en="Certifications &amp; Languages"></h2>
+          <p class="section-desc"
+             data-zh="语言能力与专业认证，展示国际化背景与持续学习的态度。"
+             data-en="Language proficiency and professional certifications reflecting international background and continuous learning."></p>
+        </div>
+
+        <div class="cert-grid">
+          <div class="cert-card fade-up">
+            <div class="cert-icon blue">🌏</div>
+            <div class="cert-info">
+              <h4 data-zh="IELTS 雅思成绩" data-en="IELTS Score"></h4>
+              <p data-zh="总分 6.5，写作 6.0，具备英文学术读写与口头汇报能力" data-en="Overall 6.5, Writing 6.0; capable of academic reading, writing, and oral presentation in English"></p>
+              <span class="cert-score">6.0 / 6.5</span>
+            </div>
+          </div>
+
+          <div class="cert-card fade-up" style="transition-delay:.1s">
+            <div class="cert-icon teal">📝</div>
+            <div class="cert-info">
+              <h4 data-zh="CET-6 大学英语六级" data-en="CET-6 (College English Test Band 6)"></h4>
+              <p data-zh="通过大学英语六级考试，具备良好的英语综合能力" data-en="Passed CET-6, demonstrating strong comprehensive English ability"></p>
+            </div>
+          </div>
+
+          <div class="cert-card fade-up" style="transition-delay:.2s">
+            <div class="cert-icon orange">📜</div>
+            <div class="cert-info">
+              <h4 data-zh="EA 华盛顿协议认证" data-en="Engineers Australia (Washington Accord)"></h4>
+              <p data-zh="毕业后获得 Engineers Australia (EA) 华盛顿协议工程师认证，具备国际互认的工程专业资格" data-en="Upon graduation, will receive Engineers Australia (EA) certification under the Washington Accord, an internationally recognized engineering qualification"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HOBBIES & INTERESTS ===== -->
+    <section class="section" id="hobbies">
+      <div class="container">
+        <div class="section-header fade-up">
+          <div class="section-kicker" data-zh="HOBBIES &amp; INTERESTS" data-en="HOBBIES &amp; INTERESTS"></div>
+          <h2 class="section-title" data-zh="兴趣爱好" data-en="Hobbies &amp; Interests"></h2>
+          <p class="section-desc"
+             data-zh="工作之外，我也在文学、音乐与运动中寻找生活的平衡与灵感。这些爱好塑造了我的思考方式与人生态度。"
+             data-en="Beyond work, I find balance and inspiration in literature, music, and sports. These hobbies shape my thinking and outlook on life."></p>
+        </div>
+
+        <div class="hobbies-grid">
+          <!-- 读书/诗歌 -->
+          <div class="hobby-card fade-up">
+            <div class="hobby-banner books"></div>
+            <div class="hobby-body">
+              <div class="hobby-icon books">📚</div>
+              <h4 data-zh="文学与诗歌" data-en="Literature &amp; Poetry"></h4>
+              <div class="hobby-desc"
+                   data-zh="我热爱阅读，尤其钟情于诗歌。在众多诗人中，奥地利诗人里尔克（Rainer Maria Rilke）对我影响最深——他的《杜伊诺哀歌》和《给青年诗人的信》是我反复阅读的作品。里尔克对孤独、存在与内在成长的深刻洞察，让我在工程思维之外，也学会了用诗意的眼光审视世界。阅读让我保持思考的深度与内心的宁静。"
+                   data-en="I'm passionate about reading, especially poetry. Among all poets, Rainer Maria Rilke has had the deepest influence on me — his 'Duino Elegies' and 'Letters to a Young Poet' are works I return to repeatedly. Rilke's profound insights on solitude, existence, and inner growth have taught me to see the world with poetic eyes beyond engineering thinking. Reading helps me maintain depth of thought and inner peace."></div>
+              <div class="hobby-tags">
+                <span class="hobby-tag purple">📖 Rilke</span>
+                <span class="hobby-tag purple" data-zh="杜伊诺哀歌" data-en="Duino Elegies"></span>
+                <span class="hobby-tag purple" data-zh="诗歌" data-en="Poetry"></span>
+              </div>
+              <div class="hobby-quote purple">
+                <span class="hobby-quote-text" data-zh="「你必须改变你的生活。」" data-en="&quot;You must change your life.&quot;"></span>
+                <span class="hobby-quote-author">— Rainer Maria Rilke</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 音乐/摇滚 -->
+          <div class="hobby-card fade-up" style="transition-delay:.1s">
+            <div class="hobby-banner music"></div>
+            <div class="hobby-body">
+              <div class="hobby-icon music">🎸</div>
+              <h4 data-zh="音乐与摇滚" data-en="Music &amp; Rock"></h4>
+              <div class="hobby-desc"
+                   data-zh="音乐是我生活中不可或缺的一部分，尤其是摇滚乐。The Beatles 是我最喜爱的乐队——从早期充满活力的《A Hard Day's Night》到后期实验性的《Abbey Road》，他们用音乐定义了一个时代。我欣赏摇滚乐中的反叛精神、创新意识和对自由的追求。音乐给予我能量，也让我在压力中找到释放与平衡。"
+                   data-en="Music is an indispensable part of my life, especially rock music. The Beatles are my favorite band — from the energetic early 'A Hard Day's Night' to the experimental 'Abbey Road', they defined an era with their music. I admire the rebellious spirit, innovation, and pursuit of freedom in rock music. Music gives me energy and helps me find release and balance under pressure."></div>
+              <div class="hobby-tags">
+                <span class="hobby-tag red">🎵 The Beatles</span>
+                <span class="hobby-tag orange">Abbey Road</span>
+                <span class="hobby-tag red" data-zh="摇滚乐" data-en="Rock"></span>
+              </div>
+              <div class="hobby-quote red">
+                <span class="hobby-quote-text" data-zh="「最终，你获得的爱，等于你付出的爱。」" data-en="&quot;And in the end, the love you take is equal to the love you make.&quot;"></span>
+                <span class="hobby-quote-author">— The Beatles, "The End"</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 运动 -->
+          <div class="hobby-card fade-up" style="transition-delay:.2s">
+            <div class="hobby-banner sports"></div>
+            <div class="hobby-body">
+              <div class="hobby-icon sports">⚽</div>
+              <h4 data-zh="足球与羽毛球" data-en="Football &amp; Badminton"></h4>
+              <div class="hobby-desc"
+                   data-zh="运动让我保持健康与活力。足球是我的团队运动首选——场上的配合与默契让我深刻理解团队协作的重要性；而羽毛球则是我锻炼反应与专注力的方式。无论是周末的球场奔跑，还是朋友间的羽毛球对决，运动都让我在紧张的学习与工作中获得放松，同时培养了我的竞争意识与抗压能力。"
+                   data-en="Sports keep me healthy and energized. Football is my go-to team sport — the coordination and teamwork on the field have taught me the importance of collaboration. Badminton is how I train my reflexes and focus. Whether running on the football pitch on weekends or playing badminton with friends, sports help me relax from intense study and work while building my competitive spirit and resilience under pressure."></div>
+              <div class="hobby-tags">
+                <span class="hobby-tag green">⚽ <span data-zh="足球" data-en="Football"></span></span>
+                <span class="hobby-tag teal">🏸 <span data-zh="羽毛球" data-en="Badminton"></span></span>
+                <span class="hobby-tag green" data-zh="团队协作" data-en="Teamwork"></span>
+              </div>
+              <div class="hobby-quote green">
+                <span class="hobby-quote-text" data-zh="「运动不仅是锻炼身体，更是锻炼意志与团队精神。」" data-en="&quot;Sports train not just the body, but also willpower and team spirit.&quot;"></span>
+                <span class="hobby-quote-author" data-zh="— 个人感悟" data-en="— Personal Reflection"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SELF EVALUATION ===== -->
+    <section class="section" id="evaluation">
+      <div class="container">
+        <div class="section-header fade-up">
+          <div class="section-kicker" data-zh="SELF EVALUATION" data-en="SELF EVALUATION"></div>
+          <h2 class="section-title" data-zh="自我评价" data-en="Self Evaluation"></h2>
+          <p class="section-desc"
+             data-zh="从工作态度到专业素养，对自身特质与价值的客观总结。"
+             data-en="An objective summary of personal traits and values, from work attitude to professional competence."></p>
+        </div>
+
+        <div class="eval-grid">
+          <div class="eval-card fade-up">
+            <div class="eval-icon">🎯</div>
+            <div class="eval-content">
+              <h4 data-zh="目标导向，执行力强" data-en="Goal-Oriented with Strong Execution"></h4>
+              <p data-zh="面对任务能快速拆解并制定执行计划，注重效率与结果质量，具备独立完成工作的能力，同时善于在团队协作中承担责任。"
+                 data-en="Able to quickly break down tasks and formulate execution plans. Focused on efficiency and result quality, capable of independent work, and willing to take responsibility in team collaboration."></p>
+            </div>
+          </div>
+
+          <div class="eval-card fade-up" style="transition-delay:.1s">
+            <div class="eval-icon">📚</div>
+            <div class="eval-content">
+              <h4 data-zh="持续学习，快速适应" data-en="Continuous Learner &amp; Fast Adapter"></h4>
+              <p data-zh="从光电信息到电力系统，从国内本科到海外硕士，每次转型都展现了快速学习和适应新环境的能力。面对新工具、新任务从不退缩，而是主动拥抱。"
+                 data-en="Transitioning from photonics to power systems, from domestic undergraduate to overseas master's — each shift demonstrates the ability to learn quickly and adapt. Never shy from new tools or challenges."></p>
+            </div>
+          </div>
+
+          <div class="eval-card fade-up">
+            <div class="eval-icon">🤝</div>
+            <div class="eval-content">
+              <h4 data-zh="踏实务实，注重细节" data-en="Pragmatic &amp; Detail-Oriented"></h4>
+              <p data-zh="无论是实验室项目还是工程现场实习，始终保持严谨务实的态度，重视每一个技术细节和操作规范，对工作质量有高标准要求。"
+                 data-en="Whether in lab projects or on-site internships, I maintain a rigorous and pragmatic attitude, paying attention to every technical detail and operational standard with high quality expectations."></p>
+            </div>
+          </div>
+
+          <div class="eval-card fade-up" style="transition-delay:.1s">
+            <div class="eval-icon">💡</div>
+            <div class="eval-content">
+              <h4 data-zh="工具驱动，效率优先" data-en="Tool-Driven Efficiency Maximizer"></h4>
+              <p data-zh="善于发现和利用合适的工具提升工作效率，从专业仿真软件到 AI 辅助工具，始终关注'如何更好地完成任务'而非局限于传统方法。"
+                 data-en="Skilled at discovering and leveraging the right tools — from professional simulation software to AI — always focused on 'how to do it better' rather than being limited by conventional approaches."></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-card fade-up">
+          <h2 class="contact-title" data-zh="📬 联系我" data-en="📬 Get in Touch"></h2>
+          <p class="contact-desc"
+             data-zh="如果你对我的背景、项目经历或岗位匹配度感兴趣，欢迎与我联系。我期待加入一个能够持续成长、深入实践并创造价值的团队。"
+             data-en="If my background, project experience, or capabilities match your team's needs, feel free to reach out. I'm looking forward to joining a team where I can grow, contribute, and create value."></p>
+
+          <div class="contact-grid">
+            <div class="contact-item">
+              <div class="contact-label" data-zh="📱 手机" data-en="📱 Phone"></div>
+              <div class="contact-value">18762095090</div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-label" data-zh="📧 邮箱" data-en="📧 Email"></div>
+              <div class="contact-value">1912737781@qq.com</div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-label" data-zh="📍 目标地区" data-en="📍 Target Region"></div>
+              <div class="contact-value" data-zh="江浙沪（接受出差）" data-en="Yangtze River Delta (Travel OK)"></div>
+            </div>
+          </div>
+
+          <div class="contact-actions">
+            <a class="btn btn-outline-white" href="mailto:1912737781@qq.com" data-zh="✉️ 发送邮件" data-en="✉️ Send Email"></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="#objective" data-zh="求职意向" data-en="Objective"></a>
+        <a href="#about" data-zh="关于我" data-en="About"></a>
+        <a href="#projects" data-zh="项目经历" data-en="Projects"></a>
+        <a href="#skills" data-zh="技能" data-en="Skills"></a>
+        <a href="#hobbies" data-zh="兴趣爱好" data-en="Hobbies"></a>
+        <a href="#contact" data-zh="联系我" data-en="Contact"></a>
+      </div>
+      <span data-zh="© 2025 王洋 · 个人主页 · 电气工程硕士" data-en="© 2025 Wang Yang · Personal Portfolio · M.Eng. Electrical Engineering"></span>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <script>
+    // ===== Language Switcher =====
+    let currentLang = 'zh';
+
+    function setLang(lang, btn) {
+      currentLang = lang;
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('[data-zh]').forEach(el => {
+        const value = el.getAttribute('data-' + lang);
+        if (value !== null) {
+          el.innerHTML = value;
+        }
+      });
+
+      // Re-run typed effect
+      startTypedEffect(lang);
+    }
+
+    // Initialize content
+    document.querySelectorAll('[data-zh]').forEach(el => {
+      el.innerHTML = el.getAttribute('data-zh');
+    });
+
+    // ===== Typed Effect =====
+    function startTypedEffect(lang) {
+      const el = document.getElementById('heroTyped');
+      const text = lang === 'zh' ? '你好，我是王洋' : "Hi, I'm Wang Yang";
+      el.textContent = '';
+      let i = 0;
+
+      function type() {
+        if (i < text.length) {
+          el.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, lang === 'zh' ? 120 : 80);
+        }
+      }
+      type();
+    }
+
+    startTypedEffect('zh');
+
+    // ===== Scroll Progress Bar =====
+    const scrollProgress = document.getElementById('scrollProgress');
+
+    function updateScrollProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      scrollProgress.style.width = scrollPercent + '%';
+    }
+
+    // ===== Back to Top Button =====
+    const backToTop = document.getElementById('backToTop');
+
+    function updateBackToTop() {
+      if (window.scrollY > 400) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    }
+
+    // ===== Active Nav Tracking =====
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    function updateActiveNav() {
+      const scrollY = window.scrollY + 120;
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + sectionId) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }
+
+    // ===== Scroll Event Handler =====
+    window.addEventListener('scroll', () => {
+      updateScrollProgress();
+      updateBackToTop();
+      updateActiveNav();
+    }, { passive: true });
+
+    // ===== Intersection Observer for Animations =====
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -60px 0px',
+      threshold: 0.1
+    };
+
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+
+          // Animate skill bars
+          const bars = entry.target.querySelectorAll('.skill-bar-fill');
+          bars.forEach(bar => {
+            const width = bar.getAttribute('data-width');
+            if (width) {
+              setTimeout(() => { bar.style.width = width; }, 200);
+            }
+          });
+
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => {
+      animObserver.observe(el);
+    });
+
+    // ===== Counter Animation =====
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counters = entry.target.querySelectorAll('.counter');
+          counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 1500;
+            const step = target / (duration / 30);
+            let current = 0;
+
+            const timer = setInterval(() => {
+              current += step;
+              if (current >= target) {
+                counter.textContent = target;
+                clearInterval(timer);
+              } else {
+                counter.textContent = Math.floor(current);
+              }
+            }, 30);
+          });
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.stats-grid').forEach(el => {
+      counterObserver.observe(el);
+    });
+  </script>
+</body>
+</html>
